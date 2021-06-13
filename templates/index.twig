@@ -4,9 +4,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Navarik Zoo</title>
 </head>
 <body>
-    Action: {{ action }}
+    <div class="header">
+        <h1>Zoo is open.</h1>
+        <div>
+            Time at the zoo:
+            <span>{{ time }}</span>
+        </div>
+    </div>
+    <div>
+        <div class="animal-group monkey">
+            Monkeys <span class="description">Monkeys die at 30%</span>
+        </div>
+        <ul>
+            {% for monkey in animals.monkeys %}
+            <li title="{{ monkey }}">
+                <img src="{{ monkey.img }}" alt="Monkey icon" />
+                <span class="hp-amount">{{ monkey.health }} %</span>
+                <div class="hp-bar">
+                    <i class="hp-background" aria-hidden="true"></i>
+                    <i class="hp-foreground hp-{{monkey.hpColor}}" aria-hidden="true" style="width: {{ monkey.health }}%"></i>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>  
+    </div>
+    <div> 
+        Giraffes:
+        <ul>
+            {% for giraffe in animals.giraffes %}
+            <li>{{ giraffe }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        Elephants:
+        <ul>
+            {% for elephant in animals.elephants %}
+            <li>{{ elephant }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="btn-container">
+        <input type="button" onclick="location.href='?action=feed';" value="Feed animals" />
+        <input type="button" onclick="location.href='?action=age';" value="Pass one hour" />
+    </div>
+    <a href="?action=close" title="Destroys session to test Zoo again =)" value="">Close the Zoo</a>
 </body>
 </html>

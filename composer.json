@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "serve": "php -S localhost:8080"
+        "start": "php -S localhost:8080"
     },
     "require": {
         "php": ">=7.2.5",
@@ -8,7 +8,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Navarik\\": "src"
+            "Navarik\\Zoo\\": "src"
         }
     }
 
