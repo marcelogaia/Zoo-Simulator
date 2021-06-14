@@ -57,7 +57,7 @@ namespace Navarik\Zoo {
 
             foreach( self::$animals  as $group ) {
                 foreach( $group as $animal ) {
-                    $animal->age( $foodAmount );
+                    $animal->age();
                 }
             }
 
