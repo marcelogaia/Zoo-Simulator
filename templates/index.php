@@ -13,7 +13,7 @@
         <h1>Zoo is open</h1>
         <div class="time">
             Time at the zoo:
-            <span>{{ time }}</span>
+            <span><?php echo $time; ?></span>
         </div>
     </div>
     <div class="animal-group giraffe">
@@ -21,15 +21,15 @@
             Giraffes <span>Giraffes die at 50%</span>
         </div>
         <ul>
-            {% for giraffe in animals.giraffes %}
+            <?php foreach( $animals['giraffes'] as $giraffe ): ?>
             <li>
-                <img src="{{ giraffe.isAlive ? 'images/giraffe.svg' : 'images/rip.svg' }}" alt="Giraffe Icon" />
-                <span class="hp-amount">{{ giraffe.health|number_format(1, '.', ',')  }} %</span>
+                <img src="<?php echo $giraffe->isAlive ? 'images/giraffe.svg' : 'images/rip.svg'; ?>" alt="Giraffe Icon" />
+                <span class="hp-amount"><?php echo number_format($giraffe->health, 1, '.', ',') ?> %</span>
                 <div class="hp-bar">
-                    <i class="hp-foreground hp-{{giraffe.hpColor}}" aria-hidden="true" style="width: {{ giraffe.health }}%"></i>
+                    <i class="hp-foreground hp-<?php echo $giraffe->hpColor ?>" aria-hidden="true" style="width: <?php echo $giraffe->health ?>%"></i>
                 </div>
             </li>
-            {% endfor %}
+            <?php endforeach; ?>
         </ul>  
     </div>
     <div class="animal-group monkey">
@@ -37,15 +37,15 @@
             Monkeys <span>Monkeys die at 30%</span>
         </div>
         <ul>
-            {% for monkey in animals.monkeys %}
+            <?php foreach( $animals['monkeys'] as $monkey ): ?>
             <li>
-                <img src="{{ monkey.isAlive ? 'images/monkey.svg' : 'images/rip.svg' }}" alt="Monkey Icon" />
-                <span class="hp-amount">{{ monkey.health|number_format(1, '.', ',')  }} %</span>
+                <img src="<?php echo $monkey->isAlive ? 'images/monkey.svg' : 'images/rip.svg'; ?>" alt="Monkey Icon" />
+                <span class="hp-amount"><?php echo number_format($monkey->health, 1, '.', ',') ?> %</span>
                 <div class="hp-bar">
-                    <i class="hp-foreground hp-{{monkey.hpColor}}" aria-hidden="true" style="width: {{ monkey.health }}%"></i>
+                    <i class="hp-foreground hp-<?php echo $monkey->hpColor ?>" aria-hidden="true" style="width: <?php echo $monkey->health ?>%"></i>
                 </div>
             </li>
-            {% endfor %}
+            <?php endforeach; ?>
         </ul>  
     </div>
     <div class="animal-group elephant">
@@ -54,15 +54,15 @@
             <span>Elephants die if can’t walk for an hour and stop walking at 70%</span>
         </div>
         <ul>
-            {% for elephant in animals.elephants %}
+            <?php foreach( $animals['elephants'] as $elephant ): ?>
             <li>
-                <img src="{{ elephant.isAlive ? 'images/elephant.svg' : 'images/rip.svg' }}" alt="Elephant Icon" />
-                <span class="hp-amount">{{ elephant.health|number_format(1, '.', ',') }} %</span>
+                <img src="<?php echo $elephant->isAlive ? 'images/elephant.svg' : 'images/rip.svg'; ?>" alt="Elephant Icon" />
+                <span class="hp-amount"><?php echo number_format($elephant->health, 1, '.', ',') ?> %</span>
                 <div class="hp-bar">
-                    <i class="hp-foreground hp-{{elephant.hpColor}}" aria-hidden="true" style="width: {{ elephant.health }}%"></i>
+                    <i class="hp-foreground hp-<?php echo $elephant->hpColor ?>" aria-hidden="true" style="width: <?php echo $elephant->health ?>%"></i>
                 </div>
             </li>
-            {% endfor %}
+            <?php endforeach; ?>
         </ul>  
     </div>
 

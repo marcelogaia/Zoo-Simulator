@@ -123,19 +123,13 @@ namespace Navarik\Zoo {
          */
         public static function render() : void {
             self::init();
-            $loader = new \Twig\Loader\FilesystemLoader('templates');
-            $twig = new \Twig\Environment($loader);
-            
+
             if ( self::zooStarted() ) {
-                echo $twig->render( 
-                    'index.twig', 
-                    [
-                        'time'    => self::getTime(),
-                        'animals' => self::$animals
-                    ]
-                );
+                $time = self::getTime();
+                $animals = self::$animals;
+                include_once 'templates/index.php';
             } else {
-                echo $twig->render( 'start.twig' );
+                include_once 'templates/start.php';
             }
         }
 
