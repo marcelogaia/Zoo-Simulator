@@ -4,6 +4,7 @@ html, body {
 
 .header {
     margin-top: 80px;
+    position: relative;
 }
 
 .header h1 {
@@ -12,6 +13,7 @@ html, body {
     line-height: 65px;
     text-align: center;
     color: #51453C;
+    width: 100%;
 }
 
 .time {
@@ -20,6 +22,7 @@ html, body {
     font-weight: bold;
     color: #35312F;
     right: 10%;
+    top:0;
 }
 
 .time span {
@@ -127,18 +130,26 @@ html, body {
     margin: 0 8px;
 }
 
-.btn-feed {
+.button-primary {
     background: #F2A2A2;
     color: #51453C;
 }
 
-.btn-pass {
+.button-secondary {
     color: #EFD3D3;
     background: #51453C;
 }
 
-.btn-close-zoo {
+.button-close {
     right: 10%;
     color: #51453C;
     background: #EFEFEF;
+}
+
+.closed h1 {
+    margin: 200px auto 64px;
+}
+
+.time, .button-close {
+    position: absolute;
 }

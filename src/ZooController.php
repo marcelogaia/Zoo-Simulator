@@ -14,13 +14,13 @@ namespace Navarik\Zoo {
 
         public static function getTime() : string{
             $t = (object) self::$time;
-            $h = sprintf("%02d", $t->hour );
-            $m = sprintf("%02d", $t->minute );
-            return  "Day $t->day - $h:$m";
-        }
-
-        public static function getAnimals() : array{
-            return self::$animals;
+            $h = $t->hour == 0 ? 12 : $t->hour;
+            $h = $h > 12 ? $h-12 : $h;
+            
+            $h = sprintf("%02d", $h );
+            $ampm = $t->hour < 12 ? 'am' : 'pm';
+            
+            return  "Day $t->day - $h $ampm";
         }
 
         public static function passTime( int $hours = 1 ) : void {
@@ -90,7 +90,7 @@ namespace Navarik\Zoo {
                     'index.twig', 
                     [
                         'time'    => self::getTime(),
-                        'animals' => self::getAnimals()
+                        'animals' => self::$animals
                     ]
                 );
             } else {
@@ -106,7 +106,7 @@ namespace Navarik\Zoo {
                 'minute' => 0
             ];
 
-            self::$animals = $_SESSION['animals'] ??[
+            self::$animals = $_SESSION['animals'] ?? [
                 'monkeys' => [],
                 'giraffes' => [],
                 'elephants' => [],
