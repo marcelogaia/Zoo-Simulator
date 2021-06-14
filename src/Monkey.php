@@ -4,14 +4,22 @@ namespace Navarik\Zoo {
 
     class Monkey extends Animal {
 
+        /**
+         * Implements {@link Animal::updateLife()}, setting the specific rules about death 
+         * for the Monkey class and updating its status.
+         */
         public function updateLife() : void {
-            if( $this->alive && $this->health < 30 ) {
-                $this->alive = false;
+            if( $this->isAlive && $this->health < 30 ) {
+                $this->isAlive = false;
             }
         }
 
+        /**
+         * Implements {@link Animal::updateHpColor()}, updating the health bar color based 
+         * on the current danger of the Monkey.
+         */
         public function updateHpColor() : void {
-            if( ! $this->alive ) {
+            if( ! $this->isAlive ) {
                 $this->hpColor = 'gray';
                 return;
             }

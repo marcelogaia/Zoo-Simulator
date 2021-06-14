@@ -8,10 +8,19 @@ namespace Navarik\Zoo {
 
         private static array $animals;
 
+        /**
+         * Returns whether or not the Session has started, or "Zoo has opened."
+         * @return bool Is the Zoo open?
+         */
         private static function zooStarted() : bool {
             return isset( $_SESSION['started'] ) && $_SESSION['started'];
         }
 
+        /**
+         * Formats the time to be shown in the UI.
+         * 
+         * @return string Current time in the zoo. Format: 'Day 01 - 4 am'.
+         */
         public static function getTime() : string{
             $t = (object) self::$time;
             $h = $t->hour == 0 ? 12 : $t->hour;
@@ -23,6 +32,11 @@ namespace Navarik\Zoo {
             return  "Day $t->day - $h $ampm";
         }
 
+        /**
+         * Triggers the passage of time by the amount determined. With the passage of time,
+         * it also triggers the effect of hunger in each of the animals.
+         * @param int $hours Amount of hours to be passed.
+         */
         public static function passTime( int $hours = 1 ) : void {
             self::init();
             self::$time['hour'] = $_SESSION['time']['hour'] + $hours;
@@ -42,6 +56,10 @@ namespace Navarik\Zoo {
             self::saveState();
         }
 
+        /**
+         * Feeds all the (alive) animals in the Zoo, healing each type of animal
+         * by the same random amount (from 10.00 to 25.00).
+         */
         public static function feedAnimals() : void {
             self::init();
             foreach( self::$animals  as $group ) {
@@ -55,24 +73,35 @@ namespace Navarik\Zoo {
             self::saveState();
         }
 
+        /**
+         * Starts the zoo, creating all the animals all full health.
+         * Called by ?action=start or clicking the Button: "Start the zoo".
+         */
         public static function startZoo() : void {
             self::init();
             $_SESSION['started'] = true;
 
             for( $i = 0; $i < 5; $i++ ) {
-                array_push( self::$animals['monkeys'], new Monkey() );
-                array_push( self::$animals['giraffes'], new Giraffe() );
-                array_push( self::$animals['elephants'], new Elephant() );
+                self::$animals['monkeys'][$i] = new Monkey();
+                self::$animals['giraffes'][$i] = new Giraffe();
+                self::$animals['elephants'][$i] = new Elephant();
             }
             self::saveState();
         }
         
+        /**
+         * Closes the zoo and remove all data from session.
+         */
         public static function closeZoo() : void {
             session_start();
             $_SESSION = array();
             session_destroy();
         }
 
+        /** 
+         * Saves current animal and time information into the session to be used for 
+         * later requests.
+         */
         private static function saveState() : void {
             if ( self::zooStarted() ) {
                 $_SESSION['time'] = self::$time;
@@ -80,6 +109,10 @@ namespace Navarik\Zoo {
             }
         }
 
+        /**
+         * Renders the template using Twig
+         * @link https://twig.symfony.com/doc/3.x/ Twig
+         */
         public static function render() : void {
             self::init();
             $loader = new \Twig\Loader\FilesystemLoader('templates');
@@ -98,6 +131,10 @@ namespace Navarik\Zoo {
             }
         }
 
+        /**
+         * Simply starts the session and populates the static properties with data from 
+         * the session if any, or with the default values.
+         */
         public static function init() {
             session_start();
             self::$time = $_SESSION['time'] ?? [

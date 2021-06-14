@@ -2,9 +2,8 @@
 namespace Navarik\Zoo;
 require_once "vendor/autoload.php";
 
-$action = $_GET['action'] ?? '';
-
 // Simplest Router.
+$action = $_GET['action'] ?? '';
 switch( $action ) {
     case 'start':
         ZooController::startZoo();
