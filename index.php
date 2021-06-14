@@ -4,6 +4,7 @@ require_once "vendor/autoload.php";
 
 $action = $_GET['action'] ?? '';
 
+// Simplest Router.
 switch( $action ) {
     case 'start':
         ZooController::startZoo();

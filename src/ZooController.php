@@ -4,17 +4,9 @@ namespace Navarik\Zoo {
 
     class ZooController {
 
-        private static array $time = [
-            'day' => 1,
-            'hour' => 0,
-            'minute' => 0
-        ];
+        private static array $time;
 
-        private static array $animals = [
-            'monkeys' => [],
-            'giraffes' => [],
-            'elephants' => [],
-        ];
+        private static array $animals;
 
         private static function zooStarted() : bool {
             return isset( $_SESSION['started'] ) && $_SESSION['started'];
@@ -32,7 +24,7 @@ namespace Navarik\Zoo {
         }
 
         public static function passTime( int $hours = 1 ) : void {
-            session_start();
+            self::init();
             self::$time['hour'] = $_SESSION['time']['hour'] + $hours;
             self::$time['day'] = $_SESSION['time']['day'];
 
@@ -48,6 +40,7 @@ namespace Navarik\Zoo {
         }
 
         public static function feedAnimals() : void {
+            self::init();
             foreach( self::$animals  as $group ) {
                 $dp = 100; // Decimal precision.
                 $foodAmount = mt_rand( 10 * $dp, 25 * $dp ) / $dp;
@@ -60,7 +53,7 @@ namespace Navarik\Zoo {
         }
 
         public static function startZoo() : void {
-            session_start();
+            self::init();
             $_SESSION['started'] = true;
 
             for( $i = 0; $i < 5; $i++ ) {
@@ -84,16 +77,8 @@ namespace Navarik\Zoo {
             }
         }
 
-        private static function loadState() : void {
-            session_start();
-            if ( self::zooStarted() ) {
-                self::$time = $_SESSION['time'] ?? [];
-                self::$animals = $_SESSION['animals'] ?? [];
-            }
-        }
-
         public static function render() : void {
-            self::loadState();
+            self::init();
             $loader = new \Twig\Loader\FilesystemLoader('templates');
             $twig = new \Twig\Environment($loader);
             
@@ -108,6 +93,21 @@ namespace Navarik\Zoo {
             } else {
                 echo $twig->render( 'start.twig' );
             }
+        }
+
+        public static function init() {
+            session_start();
+            self::$time = $_SESSION['time'] ?? [
+                'day' => 1,
+                'hour' => 0,
+                'minute' => 0
+            ];
+
+            self::$animals = $_SESSION['animals'] ??[
+                'monkeys' => [],
+                'giraffes' => [],
+                'elephants' => [],
+            ];
         }
     }
 }
