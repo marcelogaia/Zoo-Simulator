@@ -4,55 +4,74 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Nunito">
+    <link rel="stylesheet" href="styles/main.css" />
     <title>Navarik Zoo</title>
 </head>
 <body>
-    <div class="header">
-        <h1>Zoo is open.</h1>
-        <div>
+    <div class="header d-flex flex-row">
+        <h1 class="w-100 p-1">Zoo is open.</h1>
+        <div class="time position-absolute">
             Time at the zoo:
             <span>{{ time }}</span>
         </div>
     </div>
-    <div>
-        <div class="animal-group monkey">
-            Monkeys <span class="description">Monkeys die at 30%</span>
+    <div class="animal-group giraffe">
+        <div class="description">
+            Giraffes <span>Giraffes die at 50%</span>
+        </div>
+        <ul>
+            {% for giraffe in animals.giraffes %}
+            <li title="{{ giraffe }}">
+                <img src="images/giraffe.svg" alt="Giraffe Icon" />
+                <span class="hp-amount">{{ giraffe.health }} %</span>
+                <div class="hp-bar">
+                    <i class="hp-foreground hp-{{giraffe.hpColor}}" aria-hidden="true" style="width: {{ giraffe.health }}%"></i>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>  
+    </div>
+    <div class="animal-group monkey">
+        <div class="description">
+            Monkeys <span>Monkeys die at 30%</span>
         </div>
         <ul>
             {% for monkey in animals.monkeys %}
             <li title="{{ monkey }}">
-                <img src="{{ monkey.img }}" alt="Monkey icon" />
+                <img src="images/monkey.svg" alt="Monkey Icon" />
                 <span class="hp-amount">{{ monkey.health }} %</span>
                 <div class="hp-bar">
-                    <i class="hp-background" aria-hidden="true"></i>
                     <i class="hp-foreground hp-{{monkey.hpColor}}" aria-hidden="true" style="width: {{ monkey.health }}%"></i>
                 </div>
             </li>
             {% endfor %}
         </ul>  
     </div>
-    <div> 
-        Giraffes:
-        <ul>
-            {% for giraffe in animals.giraffes %}
-            <li>{{ giraffe }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div>
-        Elephants:
+    <div class="animal-group elephant">
+        <div class="description">
+            Elephants
+            <span>Elephants die if can’t walk for an hour and stop walking at 70%</span>
+        </div>
         <ul>
             {% for elephant in animals.elephants %}
-            <li>{{ elephant }}</li>
+            <li title="{{ elephant }}">
+                <img src="images/elephant.svg" alt="Elephant Icon" />
+                <span class="hp-amount">{{ elephant.health }} %</span>
+                <div class="hp-bar">
+                    <i class="hp-foreground hp-{{elephant.hpColor}}" aria-hidden="true" style="width: {{ elephant.health }}%"></i>
+                </div>
+            </li>
             {% endfor %}
-        </ul>
+        </ul>  
     </div>
 
     <div class="btn-container">
-        <input type="button" onclick="location.href='?action=feed';" value="Feed animals" />
-        <input type="button" onclick="location.href='?action=age';" value="Pass one hour" />
+        <input type="button" class="btn-feed" onclick="location.href='?action=feed';" value="Feed animals" />
+        <input type="button" class="btn-pass" onclick="location.href='?action=age';" value="Pass one hour" />
+        <input type="button" class="btn-close-zoo position-absolute" title="Destroys session to test Zoo again =)" onclick="location.href='?action=close';" value="Close the Zoo" />
     </div>
-    <a href="?action=close" title="Destroys session to test Zoo again =)" value="">Close the Zoo</a>
 </body>
 </html>

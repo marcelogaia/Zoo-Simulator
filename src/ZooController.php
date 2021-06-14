@@ -5,7 +5,7 @@ namespace Navarik\Zoo {
     class ZooController {
 
         private static array $time = [
-            'day' => 0,
+            'day' => 1,
             'hour' => 0,
             'minute' => 0
         ];
@@ -22,10 +22,9 @@ namespace Navarik\Zoo {
 
         public static function getTime() : string{
             $t = (object) self::$time;
-            $d = $t->day>0 ? "Day $t->day - " : '';
             $h = sprintf("%02d", $t->hour );
             $m = sprintf("%02d", $t->minute );
-            return  $d . "$h:$m";
+            return  "Day $t->day - $h:$m";
         }
 
         public static function getAnimals() : array{
@@ -33,8 +32,11 @@ namespace Navarik\Zoo {
         }
 
         public static function passTime( int $hours = 1 ) : void {
-            self::$time['hour'] += $hours;
-            if( self::$time['hour'] + $hours >= 24 ) {
+            session_start();
+            self::$time['hour'] = $_SESSION['time']['hour'] + $hours;
+            self::$time['day'] = $_SESSION['time']['day'];
+
+            if( self::$time['hour'] >= 24 ) {
                 self::$time['day']++;
                 self::$time['hour'] -= 24;
             }
@@ -60,11 +62,12 @@ namespace Navarik\Zoo {
         public static function startZoo() : void {
             session_start();
             $_SESSION['started'] = true;
-            self::$animals['monkeys'] = array_fill( 0,5, new Monkey() );
-            self::$animals['giraffes'] = array_fill( 0,5, new Giraffe() );
-            self::$animals['elephants'] = array_fill( 0,5, new Elephant() );
 
-            self::$animals['monkeys'][3]->health = 50.0;
+            for( $i = 0; $i < 5; $i++ ) {
+                array_push( self::$animals['monkeys'], new Monkey() );
+                array_push( self::$animals['giraffes'], new Giraffe() );
+                array_push( self::$animals['elephants'], new Elephant() );
+            }
             self::saveState();
         }
         
