@@ -33,9 +33,12 @@ namespace Navarik\Zoo {
                 self::$time['hour'] -= 24;
             }
 
-            // TODO: Age the animals.
-            // foreach( self::$animals as animal )
-            //     animal->age( $hours );
+            foreach( self::$animals  as $group ) {
+                foreach( $group as $animal ) {
+                    $animal->age( $foodAmount );
+                }
+            }
+
             self::saveState();
         }
 

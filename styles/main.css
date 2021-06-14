@@ -94,6 +94,22 @@ html, body {
     background: #CECECE;
 }
 
+.hp-red {
+    background-color: #CC0202;
+}
+
+.hp-yellow {
+    background-color: #EEA402;
+}
+
+.hp-green {
+    background-color: #34B166;
+}
+
+.hp-gray {
+    background-color: #AFAFAF;
+}
+
 .btn-container {
     justify-content: center;
     align-items: center;

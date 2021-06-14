@@ -25,7 +25,7 @@
         <ul>
             {% for giraffe in animals.giraffes %}
             <li title="{{ giraffe }}">
-                <img src="images/giraffe.svg" alt="Giraffe Icon" />
+                <img src="{{ giraffe.alive ? 'images/giraffe.svg' : 'images/rip.svg' }}" alt="Giraffe Icon" />
                 <span class="hp-amount">{{ giraffe.health }} %</span>
                 <div class="hp-bar">
                     <i class="hp-foreground hp-{{giraffe.hpColor}}" aria-hidden="true" style="width: {{ giraffe.health }}%"></i>
@@ -41,7 +41,7 @@
         <ul>
             {% for monkey in animals.monkeys %}
             <li title="{{ monkey }}">
-                <img src="images/monkey.svg" alt="Monkey Icon" />
+                <img src="{{ monkey.alive ? 'images/monkey.svg' : 'images/rip.svg' }}" alt="Monkey Icon" />
                 <span class="hp-amount">{{ monkey.health }} %</span>
                 <div class="hp-bar">
                     <i class="hp-foreground hp-{{monkey.hpColor}}" aria-hidden="true" style="width: {{ monkey.health }}%"></i>
@@ -58,7 +58,7 @@
         <ul>
             {% for elephant in animals.elephants %}
             <li title="{{ elephant }}">
-                <img src="images/elephant.svg" alt="Elephant Icon" />
+                <img src="{{ elephant.alive ? 'images/elephant.svg' : 'images/rip.svg' }}" alt="Elephant Icon" />
                 <span class="hp-amount">{{ elephant.health }} %</span>
                 <div class="hp-bar">
                     <i class="hp-foreground hp-{{elephant.hpColor}}" aria-hidden="true" style="width: {{ elephant.health }}%"></i>
