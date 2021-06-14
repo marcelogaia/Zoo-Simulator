@@ -1,4 +1,15 @@
 {
+    "name": "marcelogaia/navarik-zoo",
+    "description": "Simple Zoo Management Application Exercise",
+    "version": "1.0.0",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Marcelo Gaia",
+            "email": "marcelo@marcelogaia.com.br",
+            "role": "Developer"
+        }
+    ],
     "scripts": {
         "start": "php -S localhost:8080"
     },

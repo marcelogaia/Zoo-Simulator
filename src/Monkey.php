@@ -1,7 +1,18 @@
 <?php 
 
+/**
+ * Class Monkey to implement the specific behaviors unique to Monkeys.
+ * 
+ * @author Marcelo Gaia <marcelo@marcelogaia.com.br>
+ */
+
+
 namespace Navarik\Zoo {
 
+    /**
+     * Monkey class, which inherits all behavior from Animal and implements all behavior
+     * specific to Monkeys.
+     */
     class Monkey extends Animal {
 
         /**
@@ -35,5 +46,4 @@ namespace Navarik\Zoo {
             }
         }
     }
-
 }

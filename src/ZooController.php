@@ -1,7 +1,15 @@
 <?php 
+/**
+ * ZooController manages the application status, session and behavior, including the current
+ * time and the status of each one of the animal. Also responsible for rendering the right
+ * template according to the whether or not the Zoo is open.
+ */
 
 namespace Navarik\Zoo {
 
+    /**
+     * Class ZooController, which controlles the whole application state and manages the Zoo.
+     */
     class ZooController {
 
         private static array $time;

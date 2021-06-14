@@ -1,7 +1,15 @@
 <?php 
+/**
+ * Abstract Class Animal from which the classes Elephant, Giraffe and Monkey will inherit.
+ * 
+ * @author Marcelo Gaia <marcelo@marcelogaia.com.br>
+ */
 
 namespace Navarik\Zoo {
 
+    /**
+     * Abstract Class Animal from which the classes Elephant, Giraffe and Monkey will inherit.
+     */
     abstract class Animal {
 
         public bool $isAlive;
@@ -53,5 +61,4 @@ namespace Navarik\Zoo {
          */
         public abstract function updateHpColor() : void;
     }
-
 }

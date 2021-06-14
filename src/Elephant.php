@@ -1,7 +1,17 @@
 <?php 
+/**
+ * Class Elephant to implement the specific behaviors unique to Elephants.
+ * 
+ * @author Marcelo Gaia <marcelo@marcelogaia.com.br>
+ */
+
 
 namespace Navarik\Zoo {
 
+    /**
+     * Elephant class, which inherits all behavior from Animal and implements all behavior
+     * specific to Elephants.
+     */
     class Elephant extends Animal {
         private bool $canWalk = true;
 
@@ -67,5 +77,4 @@ namespace Navarik\Zoo {
             }
         }
     }
-
 }

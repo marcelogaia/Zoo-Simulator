@@ -1,4 +1,11 @@
 <?php
+/**
+ * Entry point of the Navarik Zoo Application. Implements a simple router to the actions of the system and calls
+ * the necessary class and methods.
+ * 
+ * @author Marcelo Gaia <marcelo@marcelogaia.com.br>
+ */
+
 namespace Navarik\Zoo;
 require_once "vendor/autoload.php";
 

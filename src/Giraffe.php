@@ -1,7 +1,16 @@
 <?php 
+/**
+ * Class Giraffe to implement the specific behaviors unique to Giraffes.
+ * 
+ * @author Marcelo Gaia <marcelo@marcelogaia.com.br>
+ */
 
 namespace Navarik\Zoo {
 
+    /**
+     * Giraffe class, which inherits all behavior from Animal and implements all behavior
+     * specific to Giraffes.
+     */
     class Giraffe extends Animal {
 
         
@@ -37,5 +46,4 @@ namespace Navarik\Zoo {
             }
         }
     }
-
 }
